@@ -1,32 +1,68 @@
 import { promises as fs } from "fs";
 import * as path from "path";
-import getDirectories from "./get-directories";
-import getFiles from "./get-files";
 
 const root = path.join(__dirname, "../");
 
-const generateFilesTree = async (location: string) => {
-  try {
-    const dir_and_files = await fs.readdir(location);
+interface FileTreeNode {
+  name: string;
+  path: string;
+  type: "directory" | "file";
+  children?: FileTreeNode[]; // Optional field for nested directories
+}
 
-    const directories = await getDirectories(dir_and_files);
-    const files = await getFiles(dir_and_files);
+const generateFilesTree = async (
+  location: string,
+  skipDir: Set<string> = new Set()
+): Promise<FileTreeNode[]> => {
+  const excludedDirs = new Set(skipDir);
 
-    const daf = [...directories, ...files];
+  // Read the contents of the directory
+  const dirAndFiles = await fs.readdir(location);
 
-    const dirAndFiles = daf.map((item) => item.name);
+  // Process each file and directory
+  const result = await Promise.all(
+    dirAndFiles.map(async (file) => {
+      const filePath = path.join(location, file);
+      const stat = await fs.stat(filePath);
 
-    return dirAndFiles;
-  } catch (error) {
-    console.error(error);
-    return null;
-  }
+      // Skip directories that are in the excluded list
+      if (stat.isDirectory()) {
+        if (excludedDirs.has(filePath)) {
+          // Skip this directory
+          return null;
+        }
+        return {
+          name: file,
+          path: filePath,
+          type: "directory",
+          children: await generateFilesTree(filePath, excludedDirs), // Recursively get children
+        };
+      }
+
+      // If it's a file, just return the file object
+      if (stat.isFile()) {
+        return {
+          name: file,
+          path: filePath,
+          type: "file",
+        };
+      }
+
+      // Return null if it's neither a file nor a directory
+      return null;
+    })
+  );
+
+  // Filter out null values if any
+  return result.filter((item) => item !== null) as FileTreeNode[];
 };
 
 const main = async () => {
-  generateFilesTree(root)
-    .then((res) => console.log(res))
-    .catch((error) => console.error(error));
+  const excludedDirs = new Set([`${root}node_modules`, `${root}.git`]);
+  console.log(excludedDirs);
+  const data = await generateFilesTree(root, excludedDirs);
+
+  await fs.writeFile("file-trees.json", JSON.stringify(data, null, 2));
 };
 
 main();
