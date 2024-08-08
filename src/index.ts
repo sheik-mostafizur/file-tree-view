@@ -3,10 +3,15 @@ import generateFileTrees from "./generate-file-trees";
 import saveTrees from "./save-trees";
 import FileTreeNode from "./types/file-tree-node";
 
+// If do not set "../" it's work for src
 const root = path.join(__dirname, "../");
 
 const main = async () => {
-  const excludedDirs = new Set([`${root}node_modules`, `${root}.git`]);
+  const excludedDirs = new Set([
+    `${root}node_modules`,
+    `${root}.git`,
+    `${root}treeify-html`,
+  ]);
 
   const data: FileTreeNode[] = await generateFileTrees(
     root,
@@ -14,7 +19,7 @@ const main = async () => {
     "treeify"
   );
 
-  saveTrees(data);
+  saveTrees(data).html();
 };
 
 main();
