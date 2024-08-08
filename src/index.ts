@@ -2,7 +2,7 @@ import generateFileTrees from "./generate-file-trees";
 import saveTrees from "./save-trees";
 import { Config, FileTreeNode } from "./types";
 
-const fileTreeView = async (config: Config): Promise<void> => {
+export const fileTreeView = async (config: Config): Promise<void> => {
   const excludedDirs = new Set(config.ignoreDir);
 
   const data: FileTreeNode[] = await generateFileTrees(
@@ -22,5 +22,3 @@ const fileTreeView = async (config: Config): Promise<void> => {
     saveTrees(data, config?.saveAs?.jsonPath || "").json();
   }
 };
-
-export default fileTreeView;
