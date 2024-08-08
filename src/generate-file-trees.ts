@@ -2,7 +2,7 @@ import { promises as fs } from "fs";
 import * as path from "path";
 
 import splitPath from "./split-path";
-import FileTreeNode from "./types/file-tree-node";
+import { FileTreeNode } from "./types";
 
 const generateFileTrees = async (
   location: string,

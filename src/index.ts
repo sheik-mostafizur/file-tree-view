@@ -1,25 +1,26 @@
-import * as path from "path";
 import generateFileTrees from "./generate-file-trees";
 import saveTrees from "./save-trees";
-import FileTreeNode from "./types/file-tree-node";
+import { Config, FileTreeNode } from "./types";
 
-// If do not set "../" it's work for src
-const root = path.join(__dirname, "../");
-
-const main = async () => {
-  const excludedDirs = new Set([
-    `${root}node_modules`,
-    `${root}.git`,
-    `${root}treeify-html`,
-  ]);
+const fileTreeView = async (config: Config): Promise<void> => {
+  const excludedDirs = new Set(config.ignoreDir);
 
   const data: FileTreeNode[] = await generateFileTrees(
-    root,
+    config.rootPath,
     excludedDirs,
-    "treeify"
+    config.projectName
   );
 
-  saveTrees(data).html();
+  if (config?.saveAs?.html) {
+    saveTrees(data, config?.saveAs?.htmlPath || "").html();
+  }
+  if (config?.saveAs?.json) {
+    saveTrees(data, config?.saveAs?.jsonPath || "").json();
+  }
+
+  if (!config?.saveAs?.html && !config?.saveAs?.json) {
+    saveTrees(data, config?.saveAs?.jsonPath || "").json();
+  }
 };
 
-main();
+export default fileTreeView;

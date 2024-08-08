@@ -1,5 +1,5 @@
 import { promises as fs } from "fs";
-import FileTreeNode from "./types/file-tree-node";
+import { FileTreeNode } from "./types";
 
 async function checkDirectoryExists(dirPath: string) {
   try {

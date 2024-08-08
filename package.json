@@ -1,7 +1,7 @@
 {
-  "name": "file-tree-generator",
+  "name": "file-tree-view",
   "version": "0.1.0",
-  "description": "",
+  "description": "A package for visualizing file trees.",
   "main": "index.js",
   "scripts": {
     "build": "tsc",
