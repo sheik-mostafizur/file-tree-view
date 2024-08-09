@@ -32,7 +32,7 @@ const root = path.join(__dirname);
 const config = {
   rootPath: root, // The root directory to generate the file tree from
   projectName: "file-tree-view", // The name of your project
-  // Optional configuration
+  // Optional configuration start
   ignoreDir: [
     // Default skip directories -> node_modules, .git, file-tree-view
     path.join(root, "directory_name"), // Directories to ignore

@@ -33,7 +33,7 @@ const generateFileTrees = async (
         }
         return {
           name: file,
-          path: splitPath(filePath, projectName, 1),
+          path: splitPath(filePath, projectName, 1) || filePath,
           type: "directory",
           children: await generateFileTrees(
             filePath,
@@ -47,7 +47,7 @@ const generateFileTrees = async (
       if (stat.isFile()) {
         return {
           name: file,
-          path: splitPath(filePath, projectName, 1),
+          path: splitPath(filePath, projectName, 1) || filePath,
           type: "file",
         };
       }
