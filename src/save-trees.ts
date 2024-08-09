@@ -20,7 +20,7 @@ export default (data: FileTreeNode[], path = "") => {
   const json = async () => {
     try {
       await fs.writeFile(
-        savePath + "file-trees.json",
+        savePath + "file-tree-view.json",
         JSON.stringify(data, null, 2)
       );
     } catch (error) {
@@ -113,19 +113,19 @@ export default (data: FileTreeNode[], path = "") => {
 `;
 
     try {
-      const isExist = await checkDirectoryExists(savePath + "treeify-html");
+      const isExist = await checkDirectoryExists(savePath + "file-tree-view");
 
       if (isExist) {
-        await fs.writeFile(savePath + "treeify-html/tree-data.js", treeData);
-        await fs.writeFile(savePath + "treeify-html/index.html", htmlCSS);
+        await fs.writeFile(savePath + "file-tree-view/tree-data.js", treeData);
+        await fs.writeFile(savePath + "file-tree-view/index.html", htmlCSS);
       } else {
         if (savePath) {
-          fs.mkdir(savePath + "treeify-html");
+          fs.mkdir(savePath + "file-tree-view");
         } else {
-          fs.mkdir("treeify-html");
+          fs.mkdir("file-tree-view");
         }
-        await fs.writeFile(savePath + "treeify-html/tree-data.js", treeData);
-        await fs.writeFile(savePath + "treeify-html/index.html", htmlCSS);
+        await fs.writeFile(savePath + "file-tree-view/tree-data.js", treeData);
+        await fs.writeFile(savePath + "file-tree-view/index.html", htmlCSS);
       }
     } catch (error) {
       console.error(error);

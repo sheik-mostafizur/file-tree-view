@@ -1,0 +1,10 @@
+src
+node_modules
+tests
+*.log
+*.ts
+*.md
+.git
+.npmignore
+package.json
+tsconfig.json

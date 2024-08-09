@@ -1,22 +1,39 @@
 {
   "name": "file-tree-view",
   "version": "0.1.0",
-  "description": "A package for visualizing file trees.",
-  "main": "index.js",
-  "types": "index.d.ts",
+  "description": "A package for visualizing file trees generator.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
     "start": "node dist/index.js",
     "dev": "nodemon",
+    "prepublishOnly": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "file-tree-vew",
+    "visualization",
+    "file-system",
+    "directory"
+  ],
+  "author": "Sheik Mostafizur <sheikmostafizur2001@gmail.com>",
   "license": "ISC",
+  "homepage": "https://github.com/sheik-mostafizur/file-tree-view#readme",
+  "bugs": {
+    "url": "https://github.com/sheik-mostafizur/file-tree-view/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sheik-mostafizur/file-tree-view.git"
+  },
   "devDependencies": {
     "@types/node": "^22.1.0",
     "nodemon": "^3.1.4",
     "ts-node": "^10.9.2",
     "typescript": "^5.5.4"
-  }
+  },
+  "files": [
+    "dist"
+  ]
 }
