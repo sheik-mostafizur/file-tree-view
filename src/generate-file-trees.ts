@@ -9,7 +9,12 @@ const generateFileTrees = async (
   skipDir: Set<string> = new Set(),
   projectName?: string
 ): Promise<FileTreeNode[]> => {
-  const excludedDirs = new Set(skipDir);
+  const excludedDirs = new Set([
+    path.join(location, "node_modules"),
+    path.join(location, ".git"),
+    path.join(location, "file-tree-view"),
+    ...skipDir,
+  ]);
 
   // Read the contents of the directory
   const dirAndFiles = await fs.readdir(location);

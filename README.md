@@ -22,7 +22,7 @@ Here's a complete example script showing how to use `file-tree-view` to generate
 
 ```javascript
 const path = require("path");
-const { fileTreeView } = require("file-tree-view");
+const fileTreeView = require("file-tree-view/dist").default;
 
 // Define the root directory for the file tree
 // You can customize root path
@@ -34,8 +34,8 @@ const config = {
   projectName: "file-tree-view", // The name of your project
   // Optional configuration
   ignoreDir: [
-    path.join(root, "node_modules"), // Directories to ignore
-    path.join(root, ".git"),
+    // Default skip directories -> node_modules, .git, file-tree-view
+    path.join(root, "directory_name"), // Directories to ignore
   ],
   saveAs: {
     html: false, // Whether to save the file tree as an HTML file

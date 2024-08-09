@@ -41,7 +41,6 @@ export default (data: FileTreeNode[], path = "") => {
       body {
         font-family: Arial, sans-serif;
         background-color: #f5f5f5;
-        overflow: hidden;
       }
 
       #tree-container {
@@ -50,7 +49,6 @@ export default (data: FileTreeNode[], path = "") => {
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         padding: 20px;
         overflow: auto;
-        margin: auto;
       }
 
       .tree ul {
