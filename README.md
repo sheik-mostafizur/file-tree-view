@@ -48,3 +48,7 @@ const config = {
 // Generate and visualize the file tree
 fileTreeView(config);
 ```
+
+**⚠️ Warning: Important Usage Instructions**
+
+When generating a file, **make sure to call the function** responsible for this task. **After the file generation is complete, remember to disable the function** to avoid unintended operations. Failure to follow these steps may lead to unexpected behavior or performance issues.
