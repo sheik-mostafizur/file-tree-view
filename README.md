@@ -25,7 +25,8 @@ const path = require("path");
 const { fileTreeView } = require("file-tree-view");
 
 // Define the root directory for the file tree
-const root = path.join(__dirname, "../");
+// You can customize root path
+const root = path.join(__dirname);
 
 // Configuration object for fileTreeView
 const config = {
